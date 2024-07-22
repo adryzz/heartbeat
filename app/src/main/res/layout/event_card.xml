@@ -6,7 +6,6 @@
     android:layout_marginHorizontal="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/icon_timestamp_frame"
         android:layout_width="match_parent"
