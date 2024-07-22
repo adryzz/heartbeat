@@ -63,12 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // check if first run
-        if (true) {
-            // ask for server
-        }
-
-        // ask for notification permission
+        // ask for notification permission (this dialog will be hidden behind the next one)
         if (checkSelfPermission(getString(R.string.notification_permission)) == PackageManager.PERMISSION_DENIED) {
 
             if (shouldShowRequestPermissionRationale(getString(R.string.notification_permission))) {
@@ -84,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 requestPermissions(new String[] { getString(R.string.notification_permission) },0);
             }
+        }
+
+        // check if first run
+        if (true) {
+            new FirstSetupDialogFragment().show(getSupportFragmentManager(), "FirstSetupDialogFragment");
         }
 
         Intent intent = new Intent(getApplicationContext(), AortaConnectionService.class);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.action_about) {
             new AlertDialog.Builder(this)
-                    .setTitle(R.string.title_about)
+                    .setTitle(R.string.app_name)
                     .setMessage(R.string.about)
                     .setCancelable(true)
                     .show();
