@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -54,13 +57,34 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        requestPermissions(new String[] { "android.permission.POST_NOTIFICATIONS" },0);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        // check if first run
+        if (true) {
+            // ask for server
+        }
+
+        // ask for notification permission
+        if (checkSelfPermission(getString(R.string.notification_permission)) == PackageManager.PERMISSION_DENIED) {
+
+            if (shouldShowRequestPermissionRationale(getString(R.string.notification_permission))) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.title_notification_permission)
+                        .setMessage(R.string.message_notification_permission)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.ok, (dialog, which) -> {
+                            requestPermissions(new String[] { getString(R.string.notification_permission) },0);
+                            dialog.dismiss();
+                        })
+                        .show();
+            } else {
+                requestPermissions(new String[] { getString(R.string.notification_permission) },0);
+            }
+        }
 
         Intent intent = new Intent(getApplicationContext(), AortaConnectionService.class);
         startForegroundService(intent);

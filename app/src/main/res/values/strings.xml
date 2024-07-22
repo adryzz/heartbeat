@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">heartbeat</string>
+
+    <string name="notification_permission">android.permission.POST_NOTIFICATIONS</string>
+    <string name="title_notification_permission">Notifications</string>
+    <string name="message_notification_permission">This app uses a persistent notification to show important information about the connection status.\nIn order to do this, it needs the notification permission.</string>
+    <string name="ok">OK</string>
+
     <string name="title_home">Home</string>
     <string name="title_devices">Devices</string>
     <string name="title_events">Events</string>
