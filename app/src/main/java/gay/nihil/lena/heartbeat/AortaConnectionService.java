@@ -64,7 +64,7 @@ public class AortaConnectionService extends Service {
 
         NotificationCompat.Action settingsAction =
                 new NotificationCompat.Action.Builder(R.drawable.ic_home_black_24dp,
-                        getString(R.string.app_name), settingsIntent)
+                        getString(R.string.title_activity_settings), settingsIntent)
                         .build();
 
         // make the persistent notification
