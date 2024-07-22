@@ -10,9 +10,12 @@
     <string name="fgs_notification_channel_id">PERSISTENT_NOTIFICATIONS</string>
     <string name="fgs_notification_channel_name">Persistent notification</string>
     <string name="fgs_notification_channel_description">Aorta connection persistent notification</string>
-    <string name="fgs_notification_title">Aorta connection</string>
+    <string name="fgs_notification_title">Heartbeat (%1$s)</string>
     <string name="fgs_notification_offline">Offline</string>
     <string name="fgs_notification_online">Online</string>
+    <string name="fgs_notification_text_offline">Waiting for connection…</string>
+    <string name="fgs_notification_text_online">%1$d/%2$d devices connected</string>
+
 
     <string name="alert_notification_channel_id">ALERTS</string>
     <string name="alert_notification_channel_name">Device alerts</string>

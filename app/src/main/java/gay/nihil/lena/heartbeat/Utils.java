@@ -55,9 +55,9 @@ public class Utils {
         return Instant.ofEpochSecond(timestamp).toString();
     }
 
-    public static Notification createPersistentNotification(String text, Context context) {
+    public static Notification createPersistentNotification(String title, String text, Context context) {
         // make an intent to start the main UI when pressing on the persistent notification
-        Intent notificationIntent = new Intent(context, SettingsActivity.class);
+        Intent notificationIntent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent =
                 PendingIntent.getActivity(context, 0, notificationIntent,
                         PendingIntent.FLAG_IMMUTABLE);
@@ -76,7 +76,7 @@ public class Utils {
         // make the persistent notification
         NotificationCompat.Builder notification =
                 new NotificationCompat.Builder(context, context.getString(R.string.fgs_notification_channel_id))
-                        .setContentTitle(context.getText(R.string.fgs_notification_title))
+                        .setContentTitle(title)
                         .setContentText(text)
                         .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                         .setContentIntent(pendingIntent)

@@ -49,10 +49,11 @@ public class AortaConnectionService extends Service {
         registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_SCREEN_ON));
 
 
-        String notifText = getString(R.string.fgs_notification_offline);
+        String notifText = getString(R.string.fgs_notification_text_offline);
+        String notifTitle = getString(R.string.fgs_notification_title, getString(R.string.fgs_notification_offline));
         setupPreferences();
 
-        startForeground(9, Utils.createPersistentNotification(notifText, getApplicationContext()));
+        startForeground(9, Utils.createPersistentNotification(notifTitle, notifText, getApplicationContext()));
         return super.onStartCommand(intent, flags, startId);
     }
 
