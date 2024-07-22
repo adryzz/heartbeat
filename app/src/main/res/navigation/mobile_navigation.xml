@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="gay.nihil.lena.heartbeat.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="gay.nihil.lena.heartbeat.ui.devices.DevicesFragment"
+        android:label="@string/title_devices"
+        tools:layout="@layout/fragment_devices" />
 
     <fragment
         android:id="@+id/navigation_events"

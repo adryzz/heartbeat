@@ -78,7 +78,8 @@ public class AortaConnectionService extends Service {
                         .setOnlyAlertOnce(true)
                         .setVibrate(new long[] { 0L })
                         .setSound(null)
-                        .setOngoing(true);
+                        .setOngoing(true)
+                        .setSilent(true);
 
         return notification.build();
     }
