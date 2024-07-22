@@ -1,5 +1,6 @@
 package gay.nihil.lena.heartbeat;
 
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.ComponentName;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -80,7 +82,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_about) {
-            Toast.makeText(this, "about", Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.title_about)
+                    .setMessage(R.string.about)
+                    .setCancelable(true)
+                    .show();
             return true;
         }
         return super.onOptionsItemSelected(item);
