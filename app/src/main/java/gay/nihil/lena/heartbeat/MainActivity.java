@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -23,6 +24,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // check if first run
-        if (true) {
+        // check if first run (e.g. if hostname is blank) and open first-run dialog
+        if (PreferenceManager.getDefaultSharedPreferences(this).getString("server", "").isEmpty()) {
             new FirstSetupDialogFragment().show(getSupportFragmentManager(), "FirstSetupDialogFragment");
         }
 

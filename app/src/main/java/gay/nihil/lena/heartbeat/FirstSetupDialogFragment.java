@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 
 public class FirstSetupDialogFragment extends DialogFragment {
     @Override
@@ -34,6 +35,12 @@ public class FirstSetupDialogFragment extends DialogFragment {
                 })
                 .setPositiveButton(R.string.ok, (dialog, id) -> {
                     if (!hostname.getText().toString().isEmpty()) {
+                        PreferenceManager
+                                .getDefaultSharedPreferences(this.getContext())
+                                .edit()
+                                .putString("server", hostname.getText()
+                                        .toString())
+                                .apply();
                         dialog.dismiss();
                     }
                 });
