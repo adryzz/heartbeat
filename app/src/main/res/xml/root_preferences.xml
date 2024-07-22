@@ -1,4 +1,4 @@
-<PreferenceScreen
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
@@ -21,6 +21,12 @@
             app:entryValues="@array/timer_values"
             app:defaultValue="300"
             app:useSimpleSummaryProvider="true"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="use_exact_alarm"
+            android:title="@string/use_exact_alarm_setting_name"
+            android:summary="@string/use_exact_alarm_setting_summary"/>
     </PreferenceCategory>
 
     <PreferenceCategory

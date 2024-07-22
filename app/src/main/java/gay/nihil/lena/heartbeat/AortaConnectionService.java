@@ -4,11 +4,15 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.TaskStackBuilder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.LiveData;
@@ -41,47 +45,15 @@ public class AortaConnectionService extends Service {
         database = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "heartbeat-database").allowMainThreadQueries().build();
 
+        registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
+        registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_SCREEN_ON));
+
 
         String notifText = getString(R.string.fgs_notification_offline);
         setupPreferences();
 
-        startForeground(9, createPersistentNotification(notifText, false));
+        startForeground(9, Utils.createPersistentNotification(notifText, getApplicationContext()));
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    private Notification createPersistentNotification(String text, boolean addStopButton) {
-        // make an intent to start the main UI when pressing on the persistent notification
-        Intent notificationIntent = new Intent(this, SettingsActivity.class);
-        PendingIntent pendingIntent =
-                PendingIntent.getActivity(this, 0, notificationIntent,
-                        PendingIntent.FLAG_IMMUTABLE);
-
-        TaskStackBuilder builder = TaskStackBuilder.create(getApplicationContext());
-        builder.addNextIntentWithParentStack(new Intent(getApplicationContext(), SettingsActivity.class));
-
-        PendingIntent settingsIntent = builder.getPendingIntent(0,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-        NotificationCompat.Action settingsAction =
-                new NotificationCompat.Action.Builder(R.drawable.ic_home_black_24dp,
-                        getString(R.string.title_activity_settings), settingsIntent)
-                        .build();
-
-        // make the persistent notification
-        NotificationCompat.Builder notification =
-                new NotificationCompat.Builder(this, getString(R.string.fgs_notification_channel_id))
-                        .setContentTitle(getText(R.string.fgs_notification_title))
-                        .setContentText(text)
-                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                        .setContentIntent(pendingIntent)
-                        .addAction(settingsAction)
-                        .setOnlyAlertOnce(true)
-                        .setVibrate(new long[] { 0L })
-                        .setSound(null)
-                        .setOngoing(true)
-                        .setSilent(true);
-
-        return notification.build();
     }
 
     private void setupPreferences() {
@@ -91,6 +63,19 @@ public class AortaConnectionService extends Service {
             // apply preference
         });
     }
+
+    private BroadcastReceiver deviceActiveReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (Intent.ACTION_USER_PRESENT.equals(intent.getAction())) {
+                // User has unlocked the phone
+                Log.i("tag", "unlocked");
+            } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
+                // Screen is turned on
+                Log.i("tag", "turned on");
+            }
+        }
+    };
 
     @Override
     public void onDestroy() {

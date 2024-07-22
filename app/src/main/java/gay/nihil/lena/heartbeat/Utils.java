@@ -1,6 +1,16 @@
 package gay.nihil.lena.heartbeat;
 
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
+
+import androidx.core.app.NotificationCompat;
+
 import java.time.Instant;
+
+import gay.nihil.lena.heartbeat.ui.SettingsActivity;
 
 public class Utils {
 
@@ -43,5 +53,40 @@ public class Utils {
         }
 
         return Instant.ofEpochSecond(timestamp).toString();
+    }
+
+    public static Notification createPersistentNotification(String text, Context context) {
+        // make an intent to start the main UI when pressing on the persistent notification
+        Intent notificationIntent = new Intent(context, SettingsActivity.class);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(context, 0, notificationIntent,
+                        PendingIntent.FLAG_IMMUTABLE);
+
+        TaskStackBuilder builder = TaskStackBuilder.create(context);
+        builder.addNextIntentWithParentStack(new Intent(context, SettingsActivity.class));
+
+        PendingIntent settingsIntent = builder.getPendingIntent(0,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Action settingsAction =
+                new NotificationCompat.Action.Builder(R.drawable.ic_home_black_24dp,
+                        context.getString(R.string.title_activity_settings), settingsIntent)
+                        .build();
+
+        // make the persistent notification
+        NotificationCompat.Builder notification =
+                new NotificationCompat.Builder(context, context.getString(R.string.fgs_notification_channel_id))
+                        .setContentTitle(context.getText(R.string.fgs_notification_title))
+                        .setContentText(text)
+                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                        .setContentIntent(pendingIntent)
+                        .addAction(settingsAction)
+                        .setOnlyAlertOnce(true)
+                        .setVibrate(new long[] { 0L })
+                        .setSound(null)
+                        .setOngoing(true)
+                        .setSilent(true);
+
+        return notification.build();
     }
 }

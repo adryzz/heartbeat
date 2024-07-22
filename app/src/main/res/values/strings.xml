@@ -32,4 +32,6 @@
 
     <!-- Data Preferences -->
     <string name="remove_notifications_old_title">Purge events older than</string>
+    <string name="use_exact_alarm_setting_name">Use an exact timer for heartbeats</string>
+    <string name="use_exact_alarm_setting_summary">This guarantees firing, but may drain the battery quicker</string>
 </resources>
