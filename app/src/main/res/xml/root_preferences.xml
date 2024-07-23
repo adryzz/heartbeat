@@ -30,6 +30,30 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        app:title="@string/notifications_header">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="receive_low_battery_notifications"
+            android:title="@string/receive_low_battery_notifications"
+            android:summary="@string/low_battery_notification_example"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="receive_network_status_notifications"
+            android:title="@string/receive_network_status_notifications"
+            android:summary="@string/network_status_notification_example"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="receive_new_device_notifications"
+            android:title="@string/receive_new_device_notifications"
+            android:summary="@string/new_device_added_notification_example"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="receive_offline_reminders"
+            android:title="@string/receive_offline_reminders"
+            android:summary="@string/offline_reminder_example"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         app:title="@string/data_header">
 
         <ListPreference
