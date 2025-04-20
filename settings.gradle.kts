@@ -20,4 +20,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "heartbeat"
-include ':app'
+include(":app")

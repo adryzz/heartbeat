@@ -9,6 +9,7 @@ public class User {
 
     @PrimaryKey
     public long id;
+
     @ColumnInfo(name = "name")
     public String name;
 
