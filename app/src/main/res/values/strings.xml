@@ -57,8 +57,8 @@
     <string name="receive_network_status_notifications">Receive network status notifications</string>
     <string name="receive_new_device_notifications">Receive new device notifications</string>
     <string name="receive_offline_reminders">Receive offline reminders</string>
-    <string name="low_battery_notification_example">e.g. \"Device \'Stella\' has low battery!\"</string>
-    <string name="network_status_notification_example">e.g. \"Device \'Stella\' just went offline!\"</string>
+    <string name="low_battery_notification_example">e.g. \"Device \'<3\' has low battery!\"</string>
+    <string name="network_status_notification_example">e.g. \"Device \'<3\' just went offline!\"</string>
     <string name="new_device_added_notification_example">e.g. \"New device added to server!\"</string>
     <string name="offline_reminder_example">e.g. \"Your device has been offline for 1 hour!\"</string>
 </resources>
