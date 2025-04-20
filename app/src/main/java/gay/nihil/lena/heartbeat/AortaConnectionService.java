@@ -54,8 +54,12 @@ public class AortaConnectionService extends Service {
 
         registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_USER_PRESENT));
         registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_SCREEN_ON));
+        registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
         registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_BATTERY_LOW));
-
+        registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_BATTERY_OKAY));
+        registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_POWER_CONNECTED));
+        registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_POWER_DISCONNECTED));
+        registerReceiver(deviceActiveReceiver, new IntentFilter(Intent.ACTION_SHUTDOWN));
 
         String notifText = getString(R.string.fgs_notification_text_offline);
         String notifTitle = getString(R.string.fgs_notification_title, getString(R.string.fgs_notification_offline));
@@ -116,9 +120,24 @@ public class AortaConnectionService extends Service {
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
                 // Screen is turned on
                 Log.i("tag", "turned on");
+            } else if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
+                // Screen is turned off
+                Log.i("tag", "turned off");
             } else if (Intent.ACTION_BATTERY_LOW.equals(intent.getAction())) {
                 // TODO: send low battery message
                 Log.i("tag", "low battery");
+            } else if (Intent.ACTION_BATTERY_OKAY.equals(intent.getAction())) {
+                // TODO: send battery okay message
+                Log.i("tag", "battery okay");
+            } else if (Intent.ACTION_POWER_CONNECTED.equals(intent.getAction())) {
+                // TODO: send power connected
+                Log.i("tag", "power connected");
+            } else if (Intent.ACTION_POWER_DISCONNECTED.equals(intent.getAction())) {
+                // TODO: send power disconnected
+                Log.i("tag", "power disconnected");
+            } else if (Intent.ACTION_SHUTDOWN.equals(intent.getAction())) {
+                // TODO: can we even handle this???
+                Log.i("tag", "shutdown");
             }
         }
     };
